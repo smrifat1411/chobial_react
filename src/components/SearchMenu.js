@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const SearchMenu = ({ result,setResult }) => {
+const SearchMenu = ({ result, setResult, hasResult, setHasResult }) => {
   const [searchInput, setSearchInput] = useState("");
   const [debounceSearch, setDebounceSearch] = useState(searchInput);
+  const [hasResponse, setHasResponse] = useState(false)
 
   // debounce function for traces user input
   useEffect(() => {
@@ -30,15 +31,24 @@ const SearchMenu = ({ result,setResult }) => {
         },
       });
 
-    setResult(data)
+      setResult(data);
+      data.Response ==="True" && setHasResponse(true)
+      
     };
 
-    dataFetch()
-
-  }, [debounceSearch,setResult]);
+    if (debounceSearch || hasResponse) {
+      dataFetch();
+    }
+    
+  }, [debounceSearch, setResult]);
 
   return (
-    <form className="max-w-[720px]">
+    <form
+      className="max-w-[720px]"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <label
         htmlFor="search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
