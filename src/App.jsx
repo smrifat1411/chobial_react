@@ -1,12 +1,20 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import MovieDetails from "./components/MovieDetails";
 import Search from "./components/Search";
+
 
 function App() {
   return (
     <div className="mx-auto max-w-[600px] my-10">
+      <Link to="/">Home</Link>
+
+      
       <Routes>
-        <Route path="/" element={<Search />}></Route>
+        <Route path="/" element={<Search />}>
+   
+          <Route path="/movie/:title" element={<MovieDetails />}></Route>
+        </Route>
       </Routes>
     </div>
   );
