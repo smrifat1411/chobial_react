@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const SearchBar = ({ setDebouncedText }) => {
+  const { title } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
-  // const [searchValue, seTsearchValue] = useState(searchTerm)
+  const inputRef = useRef(null);
 
   // Debounce function
 
@@ -17,13 +18,22 @@ const SearchBar = ({ setDebouncedText }) => {
     };
   }, [searchTerm, setDebouncedText]);
 
+  useEffect(()=>{
+    if (title) {
+      inputRef.current.value = title
+    }
+    console.log("I am second useEffect");
+  },[title])
+  
+  // console.log(inputRef.current?.value);
+  console.log("I am rendered");
+
   return (
     <div>
       <form
         className="max-w-[720px]"
         onSubmit={(e) => {
           e.preventDefault();
-          setSearchTerm("")
         }}
       >
         <label
@@ -51,6 +61,7 @@ const SearchBar = ({ setDebouncedText }) => {
             </svg>
           </div>
           <input
+            ref={inputRef}
             value={searchTerm}
             type="search"
             id="search"

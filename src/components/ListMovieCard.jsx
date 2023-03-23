@@ -9,7 +9,6 @@ const ListMovieCard = ({ movieData }) => {
         <li className="flex items-center gap-3">
           <img className="max-h-[75px]" src={movieData.Poster} alt="" />
           <h1>{movieData.Title}</h1>
-      
         </li>
       </Link>
     </>
