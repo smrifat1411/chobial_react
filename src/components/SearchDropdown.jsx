@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ListMovieCard from "./ListMovieCard";
 
 const SearchDropdown = ({ data, openStat, setOpen }) => {
@@ -8,24 +8,24 @@ const SearchDropdown = ({ data, openStat, setOpen }) => {
 
   const newData = data.slice(0, 5);
   return (
-    <>
+    <div id="dropdown" className="absolute z-10">
       {openStat ? (
         <div
-          className=" flex flex-col gap-6 justify-center mt-2"
+          className=" flex flex-col gap-6 justify-center mt-2 bg-white"
           onClick={(e) => {
             setOpen(false);
           }}
         >
           {newData.map((movie) => {
             return (
-              <div key={movie.imdbID} onClick={()=>(console.log("I am clicked"))}>
+              <div key={movie.imdbID} className="shadow-lg">
                 <ListMovieCard  movieData={movie} />
               </div>
             );
           })}
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
