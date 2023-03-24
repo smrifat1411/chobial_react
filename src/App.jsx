@@ -1,8 +1,10 @@
 import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import MovieDetails from "./components/MovieDetails";
+import NotFoundPage from "./components/NotFoundPage";
 import Search from "./components/Search";
 import logo from './img/logo_chobial.png'
+
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/" element={<Search />}>
           <Route path="/movie/:title" element={<MovieDetails />}></Route>
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
+
       </Routes>
     </div>
   );
